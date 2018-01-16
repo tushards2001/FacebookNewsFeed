@@ -79,7 +79,7 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let feedCell =  collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FeedCell
         
         feedCell.post = posts[indexPath.row]
-        
+        feedCell.feedController = self
         return feedCell
     }
     
@@ -98,6 +98,80 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
+    let zoomView = UIImageView()
+    let navBarCoverView = UIView()
+    let tabBarCoverView = UIView()
+    let blackBackgroundView = UIView()
+    
+    var statusImageView: UIImageView?
+    
+    func animateImageView(statusImageView: UIImageView) {
+        self.statusImageView = statusImageView
+        
+        if let startingFrame = statusImageView.superview?.convert(statusImageView.frame, to: nil) {
+            
+            statusImageView.alpha = 0
+            
+            blackBackgroundView.frame = self.view.frame
+            blackBackgroundView.backgroundColor = UIColor.black
+            blackBackgroundView.alpha = 0
+            view.addSubview(blackBackgroundView)
+            
+            navBarCoverView.frame = CGRect(x: 0, y: 0, width: 1000, height: 20 + 44)
+            navBarCoverView.backgroundColor = UIColor.black
+            navBarCoverView.alpha = 0
+            
+            
+            if let keyWindow = UIApplication.shared.keyWindow {
+                keyWindow.addSubview(navBarCoverView)
+                
+                tabBarCoverView.frame = CGRect(x: 0, y: keyWindow.frame.height - 49, width: 1000, height: 49)
+                tabBarCoverView.backgroundColor = UIColor.black
+                tabBarCoverView.alpha = 0
+                
+                keyWindow.addSubview(tabBarCoverView)
+            }
+            
+            zoomView.backgroundColor = UIColor.red
+            zoomView.image = statusImageView.image
+            zoomView.contentMode = .scaleAspectFill
+            zoomView.isUserInteractionEnabled = true
+            zoomView.frame = startingFrame
+            zoomView.clipsToBounds = true
+            self.view.addSubview(zoomView)
+            
+            zoomView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(zoomOut)))
+            
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+                let height = (self.view.frame.width / startingFrame.width) * startingFrame.height
+                let y = self.view.frame.height / 2 - height / 2
+                
+                self.zoomView.frame = CGRect(x: 0, y: y, width: self.view.frame.width, height: height)
+                self.blackBackgroundView.alpha = 1
+                self.navBarCoverView.alpha = 1
+                self.tabBarCoverView.alpha = 1
+            }, completion: nil)
+        }
+        
+    }
+    
+    @objc func zoomOut() {
+        if let startingFrame = self.statusImageView!.superview?.convert(self.statusImageView!.frame, to: nil) {
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+                self.zoomView.frame = startingFrame
+                self.blackBackgroundView.alpha = 0
+                self.navBarCoverView.alpha = 0
+                self.tabBarCoverView.alpha = 0
+            }, completion: { (complete) in
+                self.zoomView.removeFromSuperview()
+                self.blackBackgroundView.removeFromSuperview()
+                self.navBarCoverView.removeFromSuperview()
+                self.tabBarCoverView.removeFromSuperview()
+                self.statusImageView?.alpha = 1
+            })
+        }
     }
 
 }

@@ -13,6 +13,8 @@ import UIKit
 
 class FeedCell: UICollectionViewCell {
     
+    var feedController: FeedController?
+    
     var post: Post? {
         didSet {
             statusImageView.image = nil
@@ -122,6 +124,7 @@ class FeedCell: UICollectionViewCell {
         imageView.image = UIImage(named: "zuckdog")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -160,6 +163,10 @@ class FeedCell: UICollectionViewCell {
         return button
     }
     
+    @objc func animate() {
+        feedController?.animateImageView(statusImageView: statusImageView)
+    }
+    
     func setupViews() {
         backgroundColor = UIColor.white
         
@@ -175,6 +182,8 @@ class FeedCell: UICollectionViewCell {
         addSubview(shareButton)
         
         addSubview(loader)
+        
+        statusImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animate)))
         
         
         addConstraintsWithFormat(format: "H:|-8-[v0(44)]-8-[v1]-8-|", views: profileImageView, nameLabel)
