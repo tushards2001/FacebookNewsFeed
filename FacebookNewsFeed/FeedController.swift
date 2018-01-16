@@ -28,6 +28,12 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // cache
+        let memoryCapacity = 500 * 1024 * 1024
+        let diskCapacity = 500 * 1024 * 1024
+        let urlCache = URLCache(memoryCapacity: memoryCapacity, diskCapacity: diskCapacity, diskPath: "myDiskPath")
+        URLCache.shared = urlCache
+        
         let postMark = Post()
         postMark.name = "Mark Zuckerberg"
         postMark.statusText = "Meanwhile, beast turned to the dark side"
