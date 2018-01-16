@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5217E641200E0B7600B80EE7 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5217E640200E0B7600B80EE7 /* CustomTabBarController.swift */; };
+		5217E643200E0F2500B80EE7 /* OtherControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5217E642200E0F2500B80EE7 /* OtherControllers.swift */; };
 		522E980B200C95BB007BA707 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E980A200C95BB007BA707 /* AppDelegate.swift */; };
 		522E980D200C95BB007BA707 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522E980C200C95BB007BA707 /* FeedController.swift */; };
 		522E9812200C95BB007BA707 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 522E9811200C95BB007BA707 /* Assets.xcassets */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5217E640200E0B7600B80EE7 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		5217E642200E0F2500B80EE7 /* OtherControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherControllers.swift; sourceTree = "<group>"; };
 		522E9807200C95BB007BA707 /* FacebookNewsFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacebookNewsFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		522E980A200C95BB007BA707 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		522E980C200C95BB007BA707 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 				522E9813200C95BB007BA707 /* LaunchScreen.storyboard */,
 				522E9816200C95BB007BA707 /* Info.plist */,
 				522E981C200CFE66007BA707 /* FeedCell.swift */,
+				5217E640200E0B7600B80EE7 /* CustomTabBarController.swift */,
+				5217E642200E0F2500B80EE7 /* OtherControllers.swift */,
 			);
 			path = FacebookNewsFeed;
 			sourceTree = "<group>";
@@ -137,6 +143,8 @@
 			files = (
 				522E980D200C95BB007BA707 /* FeedController.swift in Sources */,
 				522E980B200C95BB007BA707 /* AppDelegate.swift in Sources */,
+				5217E643200E0F2500B80EE7 /* OtherControllers.swift in Sources */,
+				5217E641200E0B7600B80EE7 /* CustomTabBarController.swift in Sources */,
 				522E981D200CFE66007BA707 /* FeedCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
